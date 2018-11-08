@@ -1,6 +1,7 @@
 source "https://rubygems.org"
 
 gem 'airborne'
+gem 'faker'
 gem 'mongoid'
 gem 'rspec'
 gem 'sinatra'
