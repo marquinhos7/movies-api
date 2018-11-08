@@ -5,6 +5,7 @@ Mongoid.load! 'mongoid.yaml'
 
 class MovieModel
     include Mongoid::Document
+    store_in collection: 'movies'
 
     field :title, type: String
     field :year, type: Numeric
