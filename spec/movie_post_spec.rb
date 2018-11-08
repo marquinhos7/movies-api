@@ -14,6 +14,21 @@ describe 'POST /movies' do
             expect_status(201)
         end
     end
+
+    describe 'status 409' do
+
+        before(:context) do 
+            @request = { title: Faker::Movie.quote, year: 2007 }
+            post '/api/movies', @request.to_json
+        end
+
+        it 'duplicate' do
+            post '/apli/movies', request.to_json
+            expect_status(409)
+            expect(json_body[:message]).to eql 'Duplicate movie.'
+        end
+    end
+
     
     describe 'status 400' do
         it 'title is required' do

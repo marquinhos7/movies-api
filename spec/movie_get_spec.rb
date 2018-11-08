@@ -1,6 +1,6 @@
 require 'faker'
 
-describe 'GET /movies' do
+describe 'GET /movies/:id' do
     describe 'status 200' do
         before(:context) do
             @req = { title: 'Batman Cavaleiro das Trevas', year: 2010 }
@@ -23,4 +23,26 @@ describe 'GET /movies' do
             expect(json_body).to eql(message: 'Movie Not Found!')
         end
     end
+end
+
+describe 'GET /movies' do
+
+    describe 'status 200' do
+        before(:context) do
+            5.times do
+                req = { 
+                    title: Faker::Movie.quote, 
+                    year: Faker::Number::between(1990, 2018) 
+                }
+                post '/api/movies', req.to_json
+            end
+        end
+
+        it 'return a list of movies' do
+            get '/api/movies'
+            expect_status(200)
+            expect_json_types('*', title: :string, year: :integer)
+        end
+    end
+
 end

@@ -29,4 +29,9 @@ namespace '/api' do
         movie_not_found!
         seri_movie(get_movie)
     end
+
+    get '/movies' do
+        movies = MovieModel.all
+        movies.map { |m| MovieSerializer.new(m) }.to_json
+    end
 end
