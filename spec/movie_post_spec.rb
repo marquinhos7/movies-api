@@ -29,7 +29,6 @@ describe 'POST /movies' do
         end
     end
 
-    
     describe 'status 400' do
         it 'title is required' do
             request = {
